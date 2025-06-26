@@ -109,20 +109,33 @@ document.addEventListener('DOMContentLoaded', function() {
     const observerOptions = {
         root: null,
         rootMargin: '0px',
-        threshold: 0.1
+        threshold: 0.15
     };
 
     const observer = new IntersectionObserver(function(entries, observer) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
+                // Add in-view class to make element visible
                 entry.target.classList.add('in-view');
+                
+                // If it's a section, animate its children with staggered delay
+                if (entry.target.tagName.toLowerCase() === 'section') {
+                    const children = entry.target.querySelectorAll('.skill-card, .publication, .wrapper');
+                    children.forEach((child, index) => {
+                        setTimeout(() => {
+                            child.classList.add('in-view');
+                        }, 100 * (index + 1));
+                    });
+                }
+                
+                // Stop observing after animation
                 observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
 
-    // Observe all sections and cards
-    document.querySelectorAll('section, .skill-card, .publication').forEach(el => {
+    // Observe all elements that should animate
+    document.querySelectorAll('section, .contact-item.mobile-only').forEach(el => {
         observer.observe(el);
     });
     
@@ -137,5 +150,27 @@ document.addEventListener('DOMContentLoaded', function() {
         element.addEventListener('touchend', () => {
             element.classList.remove('touch-active');
         }, { passive: true });
+    });
+    
+    // Separate observer for mobile contact items with different timing
+    const contactObserver = new IntersectionObserver(function(entries, observer) {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                // Add small delay before starting animation
+                setTimeout(() => {
+                    entry.target.classList.add('in-view');
+                }, 300 + (200 * index));
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.2
+    });
+
+    // Observe mobile contact items
+    document.querySelectorAll('.contact-item.mobile-only').forEach(el => {
+        contactObserver.observe(el);
     });
 }); 

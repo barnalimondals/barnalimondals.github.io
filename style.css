@@ -246,6 +246,8 @@ main {
     -webkit-backdrop-filter: blur(10px);
     position: relative;
     overflow: hidden;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
 }
 
 .hero::before {
@@ -361,6 +363,8 @@ section {
     -webkit-backdrop-filter: blur(10px);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     animation: fadeIn 0.8s ease forwards;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
 }
 
 section:hover {
@@ -404,6 +408,8 @@ section:hover h2::after {
     margin-bottom: 2rem;
     position: relative;
     transition: all 0.3s ease;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
 }
 
 .wrapper:not(:last-child)::before {
@@ -686,12 +692,35 @@ section:nth-child(5) { animation-delay: 0.8s; }
     padding: 1rem;
     text-align: center;
     width: 100%;
-    background: var(--glass-bg);
+    background: transparent;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .mobile-header h1 {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     margin: 0;
+    line-height: 1;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-header .first-name {
+    color: var(--primary-color);
+}
+
+.mobile-header .last-name {
+    color: var(--text-color);
+}
+
+/* Dark mode specific styling for mobile header */
+.dark-mode .mobile-header .first-name {
+    color: var(--primary-color);
+    text-shadow: 0 0 5px rgba(189, 92, 255, 0.3);
+}
+
+.dark-mode .mobile-header .last-name {
+    color: rgb(240, 230, 255);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 /* Responsive Design */
@@ -712,6 +741,11 @@ section:nth-child(5) { animation-delay: 0.8s; }
         left: 0;
         width: 100%;
         z-index: 1000;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: 0 1px 10px rgba(0, 0, 0, 0.05);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     /* Show mobile header with name, hide logo */
@@ -721,6 +755,7 @@ section:nth-child(5) { animation-delay: 0.8s; }
     
     .mobile-header {
         display: block;
+        background: transparent;
     }
     
     .hero h1 {
@@ -791,16 +826,6 @@ section:nth-child(5) { animation-delay: 0.8s; }
         font-size: 0.85rem;
         max-width: 100%;
         text-align: center;
-    }
-    
-    /* Additional styling for mobile navbar */
-    .mobile-header h1 {
-        font-size: 1.3rem;
-        line-height: 1;
-    }
-    
-    .mobile-header .first-name {
-        color: var(--primary-color);
     }
     
     /* Better spacing for sections on mobile */
@@ -935,6 +960,15 @@ section:nth-child(5) { animation-delay: 0.8s; }
     /* Improve spacing between education items */
     .wrapper + .wrapper {
         margin-top: 1rem;
+    }
+
+    /* Dark mode navbar for mobile */
+    .dark-mode .navbar {
+        background: rgba(30, 20, 50, 0.2);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+        border-bottom: 1px solid rgba(80, 20, 120, 0.1);
     }
 }
 
@@ -1132,7 +1166,7 @@ body.dark-mode {
     color: var(--primary-color);
 }
 
-/* Mobile contact items improved styling */
+/* Mobile contact items animation */
 @media (max-width: 768px) {
     /* Show mobile-only elements */
     .mobile-only {
@@ -1169,6 +1203,30 @@ body.dark-mode {
     .dark-mode .hero .contact-item a,
     .dark-mode .hero .email-text {
         color: rgb(240, 230, 255) !important;
+    }
+    
+    /* Animation for mobile contact items */
+    .hero .contact-item.mobile-only {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+    
+    .hero .contact-item.mobile-only.in-view {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    .hero .contact-item.mobile-only:nth-child(1) {
+        transition-delay: 0.1s;
+    }
+    
+    .hero .contact-item.mobile-only:nth-child(2) {
+        transition-delay: 0.2s;
+    }
+    
+    .hero .contact-item.mobile-only:nth-child(3) {
+        transition-delay: 0.3s;
     }
 }
 
@@ -1523,4 +1581,53 @@ section {
 .dark-mode .hero .contact-item {
     background: rgba(50, 40, 75, 0.9);
     border: 1px solid rgba(189, 92, 255, 0.3);
+}
+
+/* Improved animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Base animation for all elements */
+section, 
+.skill-card, 
+.publication, 
+.wrapper,
+.contact-item.mobile-only {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    will-change: opacity, transform;
+}
+
+/* Animation when element enters viewport */
+.in-view {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+/* Make sure hero section is always visible */
+.hero {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+/* Ensure animations don't run on small devices or when reduced motion is preferred */
+@media (prefers-reduced-motion: reduce) {
+    section, 
+    .skill-card, 
+    .publication, 
+    .wrapper,
+    .contact-item.mobile-only {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
 }
