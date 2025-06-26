@@ -179,6 +179,17 @@ h1 {
     height: 20px;
 }
 
+.contact .email-text {
+    overflow-wrap: break-word;
+    word-break: break-all;
+}
+
+.scholar, .phone, .email {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
 /* Section Styling */
 section {
     margin-bottom: 4rem;
@@ -362,6 +373,28 @@ a:hover {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    body {
+        padding: 0;
+    }
+    
+    main {
+        padding: 0;
+        width: 100%;
+    }
+    
+    .navbar {
+        padding: 0.75rem;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+    }
+    
+    .nav-container {
+        padding: 0 1rem;
+    }
+    
     .nav-links {
         display: none;
         position: fixed;
@@ -369,63 +402,206 @@ a:hover {
         left: 0;
         width: 100%;
         flex-direction: column;
-        padding: 1rem;
-        background: rgba(255, 255, 255, 0.9);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
+        padding: 0;
+        background: var(--light-color);
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         z-index: 999;
-        align-items: center;
-        gap: 1rem;
+    }
+    
+    .nav-links a {
+        width: 100%;
+        text-align: center;
+        padding: 1rem;
+        border-bottom: 1px solid rgba(133, 30, 229, 0.1);
+    }
+    
+    .nav-links a:last-child {
+        border-bottom: none;
     }
     
     .nav-links.active {
         display: flex;
-        animation: slideDown 0.3s ease forwards;
     }
 
     .hamburger {
-        display: block;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: var(--glass-bg);
+        box-shadow: 
+            3px 3px 6px rgba(0, 0, 0, 0.1),
+            -3px -3px 6px rgba(255, 255, 255, 0.5);
     }
-
+    
+    .hamburger i {
+        color: var(--primary-color);
+        font-size: 1.25rem;
+    }
+    
+    .contact div {
+        padding: 0.5rem;
+    }
+    
+    .publication a {
+        font-size: 0.9rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    /* Make the logo more prominent */
+    .logo {
+        font-size: 1.8rem;
+        font-weight: 800;
+        letter-spacing: -1px;
+    }
+    
+    /* Better hero section for mobile */
+    .hero {
+        text-align: center;
+        background: linear-gradient(135deg, rgba(133, 30, 229, 0.1) 0%, rgba(255, 255, 255, 0.8) 100%);
+    }
+    
+    /* Fix name display on mobile */
+    h1 .first-name, h1 .last-name {
+        display: inline-block;
+    }
+    
+    /* Improve section spacing */
+    section + section {
+        margin-top: 0;
+        border-radius: 0;
+    }
+    
+    /* Fix skills and research cards */
+    .skills-container {
+        margin-top: 1rem;
+    }
+    
+    .skill-card {
+        margin-bottom: 0.5rem;
+    }
+    
+    /* Improve publication display */
+    .publications {
+        padding-bottom: 0.5rem;
+    }
+    
+    /* Make footer stick to bottom on short content */
+    footer {
+        margin-top: 2rem;
+        padding: 1rem;
+        background: var(--glass-bg);
+    }
+    
+    .hero {
+        margin-top: 60px;
+        padding: 2rem 1rem;
+        border-radius: 0;
+    }
+    
     h1 {
-        font-size: 2.5rem;
+        font-size: 2rem;
+        word-break: keep-all;
+        width: 100%;
+        overflow: visible;
     }
-
+    
+    .contact {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.75rem;
+    }
+    
+    .contact div {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    section {
+        margin-bottom: 1.5rem;
+        padding: 1.5rem 1rem;
+        border-radius: 0;
+    }
+    
     .wrapper {
         flex-direction: column;
         gap: 0.5rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid rgba(133, 30, 229, 0.1);
     }
-
+    
+    .wrapper:last-child {
+        border-bottom: none;
+    }
+    
     .wrapper:not(:last-child)::before {
         display: none;
     }
-
+    
     .left {
         width: 100%;
         text-align: left;
+        padding: 0;
+        font-size: 1rem;
+        border-left: 3px solid var(--primary-color);
+        padding-left: 0.75rem;
     }
-
+    
     .left::after {
         display: none;
     }
-
+    
     .right {
         width: 100%;
+        box-shadow: none;
+        padding: 0;
+        background: transparent;
     }
-
-    .contact {
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    section {
-        padding: 1.5rem;
-    }
-
+    
     .skills-container {
         grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .skill-card {
+        padding: 1rem;
+    }
+    
+    .publication {
+        padding: 1rem;
+    }
+    
+    .institute {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    /* Fix mobile menu behavior */
+    .nav-links {
+        transition: transform 0.3s ease;
+        transform: translateY(-100%);
+        display: flex;
+    }
+    
+    .nav-links.active {
+        transform: translateY(0);
+    }
+}
+
+/* For super small screens */
+@media (max-width: 350px) {
+    h1 {
+        font-size: 1.75rem;
+    }
+    
+    .hero {
+        padding: 1.5rem 0.75rem;
     }
 }
 

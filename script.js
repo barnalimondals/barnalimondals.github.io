@@ -7,13 +7,18 @@ document.addEventListener('DOMContentLoaded', function() {
         navLinks.classList.toggle('active');
     });
 
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!hamburger.contains(e.target) && !navLinks.contains(e.target) && navLinks.classList.contains('active')) {
+            navLinks.classList.remove('active');
+        }
+    });
+
     // Close mobile menu when a link is clicked
     const menuLinks = document.querySelectorAll('.nav-links a');
     menuLinks.forEach(link => {
         link.addEventListener('click', function() {
-            if (window.innerWidth <= 768) {
-                navLinks.classList.remove('active');
-            }
+            navLinks.classList.remove('active');
         });
     });
 
@@ -26,8 +31,11 @@ document.addEventListener('DOMContentLoaded', function() {
             if (targetId !== '#') {
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
+                    const navHeight = document.querySelector('.navbar').offsetHeight;
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                    
                     window.scrollTo({
-                        top: targetElement.offsetTop - 80, // Offset for fixed header
+                        top: targetPosition,
                         behavior: 'smooth'
                     });
                 }
@@ -60,17 +68,20 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', function() {
         let current = '';
         const sections = document.querySelectorAll('section');
+        const scrollPosition = window.scrollY + 100;
         
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
-            if (pageYOffset >= sectionTop - 100) {
+            const sectionHeight = section.offsetHeight;
+            
+            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
                 current = section.getAttribute('id');
             }
         });
 
         menuLinks.forEach(link => {
             link.classList.remove('active');
-            if (link.getAttribute('href').substring(1) === current) {
+            if (link.getAttribute('href') === `#${current}`) {
                 link.classList.add('active');
             }
         });
