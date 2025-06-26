@@ -496,6 +496,7 @@ section:hover h2::after {
     transition: all 0.3s ease;
     opacity: 1 !important;
     animation: none !important;
+    position: relative;
 }
 
 .publication.in-view {
@@ -511,11 +512,36 @@ section:hover h2::after {
     display: block;
     line-height: 1.6;
     color: var(--accent-color);
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.publication a span.bold,
+.publication a em {
     transition: color 0.3s ease;
 }
 
-.publication a:hover {
-    color: var(--primary-color);
+/* Force color change on hover */
+.publication:hover a,
+.publication a:hover,
+.publication:hover a span,
+.publication:hover a em,
+.publication:hover a sub {
+    color: #bd5cff !important;
+    text-shadow: 0 0 8px rgba(189, 92, 255, 0.3);
+}
+
+/* Dark mode specific styles */
+.dark-mode .publication a {
+    color: #ccc;
+}
+
+.dark-mode .publication:hover a,
+.dark-mode .publication a:hover,
+.dark-mode .publication:hover a span,
+.dark-mode .publication:hover a em,
+.dark-mode .publication:hover a sub {
+    color: #bd5cff !important;
+    text-shadow: 0 0 8px rgba(189, 92, 255, 0.3);
 }
 
 .bold {
@@ -1340,8 +1366,11 @@ body.dark-mode {
     color: rgb(210, 180, 255);
 }
 
-.dark-mode .publication a:hover {
-    color: rgb(189, 92, 255);
+.dark-mode .publication a:hover,
+.dark-mode .publication a:hover span,
+.dark-mode .publication a:hover em {
+    color: #bd5cff !important;
+    text-shadow: 0 0 8px rgba(189, 92, 255, 0.3);
 }
 
 .dark-mode .publication sub,
@@ -1630,4 +1659,381 @@ section,
         transform: none !important;
         transition: none !important;
     }
+}
+
+/* Enhanced hover effects with motion for desktop */
+@media (min-width: 769px) {
+    /* Section hover effect */
+    section {
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                    box-shadow 0.4s ease;
+    }
+    
+    section:hover {
+        transform: translateY(-8px) scale(1.01);
+        box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Skill card hover effect */
+    .skill-card {
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                    box-shadow 0.4s ease,
+                    background-color 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .skill-card:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+    
+    .skill-card:hover::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at center, rgba(255,255,255,0.2) 0%, transparent 70%);
+        opacity: 0;
+        animation: pulse-light 2s infinite;
+    }
+    
+    .dark-mode .skill-card:hover::after {
+        background: radial-gradient(circle at center, rgba(189, 92, 255, 0.15) 0%, transparent 70%);
+    }
+    
+    /* Publication hover effect */
+    .publication {
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                    box-shadow 0.4s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .publication:hover {
+        transform: translateY(-8px) scale(1.01);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Contact item hover effect */
+    .contact div {
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                   box-shadow 0.4s ease;
+    }
+    
+    .contact div:hover {
+        transform: translateY(-8px) scale(1.05);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Education item hover effect */
+    .wrapper {
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    .wrapper:hover {
+        transform: translateX(10px);
+    }
+    
+    .wrapper:hover .left::after {
+        transform: scale(1.5);
+        box-shadow: 0 0 15px var(--primary-color);
+    }
+    
+    /* Pulse animation for hover effects */
+    @keyframes pulse-light {
+        0% { opacity: 0; }
+        50% { opacity: 1; }
+        100% { opacity: 0; }
+    }
+}
+
+/* Enhanced link hover effects */
+@media (min-width: 769px) {
+    /* Nav links hover effect */
+    .nav-links a {
+        position: relative;
+        transition: color 0.3s ease;
+    }
+    
+    .nav-links a::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--primary-color);
+        transition: width 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    .nav-links a:hover::after {
+        width: 100%;
+    }
+    
+    /* Theme toggle hover effect */
+    .theme-toggle {
+        transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                   box-shadow 0.3s ease;
+    }
+    
+    .theme-toggle:hover {
+        transform: scale(1.1) rotate(15deg);
+    }
+    
+    .theme-toggle:active,
+    .theme-toggle.clicked {
+        transform: scale(0.95) rotate(-15deg);
+    }
+    
+    /* Link hover effects in content */
+    .summary-text a,
+    .publication a {
+        position: relative;
+        transition: color 0.3s ease;
+    }
+    
+    .summary-text a::after,
+    .publication a::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: var(--primary-color);
+        transition: width 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    .summary-text a:hover::after,
+    .publication a:hover::after {
+        width: 100%;
+    }
+    
+    /* Add subtle rotation to icons on hover */
+    .skill-card:hover i,
+    .contact div:hover i {
+        animation: wiggle 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    @keyframes wiggle {
+        0% { transform: rotate(0); }
+        25% { transform: rotate(-10deg); }
+        50% { transform: rotate(10deg); }
+        75% { transform: rotate(-5deg); }
+        100% { transform: rotate(0); }
+    }
+}
+
+/* Logo and mobile menu hover effects */
+@media (min-width: 769px) {
+    /* Logo hover effect */
+    .logo {
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                   text-shadow 0.4s ease,
+                   color 0.3s ease;
+    }
+    
+    .logo:hover {
+        transform: scale(1.1) rotate(5deg);
+        text-shadow: 0 0 15px rgba(189, 92, 255, 0.5);
+        color: var(--primary-color);
+    }
+    
+    /* Add hover effect to hero section name */
+    .hero h1 .first-name,
+    .hero h1 .last-name {
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                   text-shadow 0.4s ease;
+        display: inline-block;
+    }
+    
+    .hero h1 .first-name:hover {
+        transform: translateY(-5px) scale(1.05);
+        text-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    .hero h1 .last-name:hover {
+        transform: translateY(-5px) scale(1.05);
+        text-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+}
+
+/* Global transitions for smooth hover effects */
+@media (min-width: 769px) {
+    /* Apply smooth transitions to all elements */
+    * {
+        transition-property: transform, box-shadow, background-color, color, opacity;
+        transition-duration: 0.3s;
+        transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    /* Ensure sections have proper perspective for 3D effects */
+    section {
+        transform-style: preserve-3d;
+        perspective: 1000px;
+        backface-visibility: hidden;
+        will-change: transform;
+    }
+    
+    /* Optimize performance for animations */
+    .skill-card, .publication, .wrapper, .contact div, .logo, .nav-links a {
+        will-change: transform;
+    }
+}
+
+/* Enhanced card inner elements motion and dark mode fixes */
+@media (min-width: 769px) {
+    /* Add movement to elements inside cards */
+    .skill-card h3 {
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                   color 0.3s ease;
+    }
+    
+    .skill-card:hover h3 {
+        transform: translateY(-5px);
+        color: var(--primary-color);
+    }
+    
+    .skill-card p {
+        transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    .skill-card:hover p {
+        transform: translateY(-3px);
+    }
+    
+    /* Add movement to elements inside education cards */
+    .wrapper .right .degree {
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                   color 0.3s ease;
+    }
+    
+    .wrapper:hover .right .degree {
+        transform: translateY(-3px);
+        color: var(--primary-color);
+    }
+    
+    .wrapper .right .place,
+    .wrapper .right .percentage {
+        transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    .wrapper:hover .right .place {
+        transform: translateY(-2px);
+    }
+    
+    .wrapper:hover .right .percentage {
+        transform: translateY(-1px);
+    }
+    
+    /* Fix shadows in dark mode */
+    .dark-mode section {
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    .dark-mode section:hover {
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+    
+    .dark-mode .skill-card {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    .dark-mode .skill-card:hover {
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    }
+    
+    .dark-mode .publication {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                    box-shadow 0.4s ease;
+    }
+    
+    .dark-mode .publication:hover {
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 
+                    0 0 20px rgba(189, 92, 255, 0.3);
+    }
+    
+    .dark-mode .contact div {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    .dark-mode .contact div:hover {
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    }
+    
+    /* Enhanced glow effect for dark mode */
+    .dark-mode .skill-card:hover {
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 
+                    0 0 20px rgba(189, 92, 255, 0.2);
+    }
+    
+    .dark-mode .publication:hover {
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 
+                    0 0 20px rgba(189, 92, 255, 0.2);
+    }
+    
+    /* Add shadows to education cards in dark mode */
+    .dark-mode .wrapper .right {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                    box-shadow 0.4s ease;
+    }
+    
+    .dark-mode .wrapper:hover .right {
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3),
+                    0 0 15px rgba(189, 92, 255, 0.2);
+    }
+    
+    /* Enhanced glow for the timeline dot in dark mode */
+    .dark-mode .wrapper .left::after {
+        box-shadow: 0 0 5px rgba(189, 92, 255, 0.5);
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                    box-shadow 0.4s ease;
+    }
+    
+    .dark-mode .wrapper:hover .left::after {
+        box-shadow: 0 0 15px rgba(189, 92, 255, 0.8);
+    }
+}
+
+/* Fix publication link text color on hover */
+@media (min-width: 769px) {
+    /* Publication link hover in light mode */
+    .publication a {
+        transition: color 0.3s ease;
+    }
+    
+    .publication a:hover {
+        color: var(--primary-color);
+    }
+    
+    /* Publication link hover in dark mode */
+    .dark-mode .publication a:hover {
+        color: #bd5cff;
+    }
+}
+
+/* Fix publication link hover effect with more specificity */
+.publication a:hover,
+.publication a:hover span,
+.publication a:hover em {
+    color: #bd5cff !important;
+    text-shadow: 0 0 8px rgba(189, 92, 255, 0.3);
+}
+
+.dark-mode .publication a,
+.dark-mode .publication a span,
+.dark-mode .publication a em {
+    color: #ccc;
+}
+
+.dark-mode .publication a:hover,
+.dark-mode .publication a:hover span,
+.dark-mode .publication a:hover em {
+    color: #bd5cff !important;
+    text-shadow: 0 0 8px rgba(189, 92, 255, 0.3);
 }
