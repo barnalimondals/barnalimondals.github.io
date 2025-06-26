@@ -15,6 +15,10 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">BM</div>
+            <!-- Mobile Header -->
+            <div class="mobile-header">
+                <h1><span class="first-name">Barnali</span> <span class="last-name">Mondal</span></h1>
+            </div>
             <div class="nav-links">
                 <a href="#about">About</a>
                 <a href="#education">Education</a>
@@ -24,10 +28,43 @@
                 <a href="#projects">Research</a>
             </div>
             <div class="hamburger">
-                <i class="fas fa-bars"></i>
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
             </div>
         </div>
     </nav>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="bottom-nav">
+        <div class="bottom-nav-container">
+            <a href="#about" class="nav-item active">
+                <i class="fas fa-user"></i>
+                <span>About</span>
+            </a>
+            <a href="#education" class="nav-item">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Education</span>
+            </a>
+            <a href="#skills" class="nav-item">
+                <i class="fas fa-tools"></i>
+                <span>Skills</span>
+            </a>
+            <a href="#publications" class="nav-item">
+                <i class="fas fa-book"></i>
+                <span>Papers</span>
+            </a>
+            <a href="#projects" class="nav-item">
+                <i class="fas fa-flask"></i>
+                <span>Research</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Dark Mode Toggle -->
+    <div class="theme-toggle">
+        <i class="fas fa-moon"></i>
+    </div>
 
     <main>
         <!-- Hero Section -->
@@ -36,6 +73,8 @@
             <p class="institute">
                 Indian Institute of Science Education and Research Pune
             </p>
+            
+            <!-- Desktop Contact Info -->
             <div class="contact">
                 <div class="phone">
                     <i class="fas fa-phone"></i>
@@ -48,6 +87,26 @@
                 <div class="email">
                     <i class="fas fa-envelope"></i>
                     <a href="mailto:mondal.barnali@students.iiserpune.ac.in" class="email-text">mondal.barnali@students.iiserpune.ac.in</a>
+                </div>
+            </div>
+            
+            <!-- Mobile Contact Items -->
+            <div class="mobile-contact-items">
+                <div class="contact-item phone-item">
+                    <i class="fas fa-phone"></i>
+                    <span>(+91) 8637029256</span>
+                </div>
+                <div class="contact-item scholar-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <a href="https://scholar.google.co.in/citations?user=JZnmYAIAAAAJ&hl=en">Google Scholar</a>
+                </div>
+                <div class="contact-item email-item">
+                    <div class="email-wrapper">
+                        <i class="fas fa-envelope"></i>
+                        <div class="email-container">
+                            <a href="mailto:mondal.barnali@students.iiserpune.ac.in" class="email-text">mondal.barnali@students.iiserpune.ac.in</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -245,17 +304,17 @@
             
             <div class="skills-container">
                 <div class="skill-card">
-                    <h3>NIR Light Emitting Perovskites</h3>
+                    <h3><i class="fas fa-lightbulb"></i> NIR Light Emitting Perovskites</h3>
                     <p>Development of tungsten and molybdenum-doped perovskites for near-infrared emission with potential applications in night vision and bioimaging.</p>
                 </div>
                 
                 <div class="skill-card">
-                    <h3>2D Layered Perovskites</h3>
+                    <h3><i class="fas fa-layer-group"></i> 2D Layered Perovskites</h3>
                     <p>Synthesis and characterization of novel 2D layered hybrid perovskite materials with enhanced optical properties.</p>
                 </div>
                 
                 <div class="skill-card">
-                    <h3>LED Device Fabrication</h3>
+                    <h3><i class="fas fa-microchip"></i> LED Device Fabrication</h3>
                     <p>Design and implementation of phosphor-converted light emitting diodes utilizing synthesized NIR emitting materials.</p>
                 </div>
             </div>
@@ -265,14 +324,6 @@
             <p>&copy; 2025 Barnali Mondal. All rights reserved.</p>
         </footer>
     </main>
-    
-    <!-- JavaScript for mobile menu toggle -->
-    <script>
-        document.querySelector('.hamburger').addEventListener('click', function() {
-            const navLinks = document.querySelector('.nav-links');
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-        });
-    </script>
     
     <!-- JavaScript -->
     <script src="script.js"></script>
