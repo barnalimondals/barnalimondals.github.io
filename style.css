@@ -1432,6 +1432,10 @@ body.home .nav.nav--scrolled {
                 var(--stone-50) 100%);
     }
 
+    .hero__scroll {
+        display: none;
+    }
+
     .hero__text-col {
         margin-left: 0;
         padding: var(--space-xl);
