@@ -7,6 +7,27 @@ const nav = document.querySelector('.nav');
 const hamburger = document.querySelector('.nav__hamburger');
 const mobileMenu = document.querySelector('.nav__mobile-menu');
 
+// --- Hero parallax/tilt effect ---
+const hero = document.querySelector('.hero');
+const heroPhoto = document.querySelector('.hero__photo');
+
+if (hero && heroPhoto) {
+  hero.addEventListener('mousemove', (e) => {
+    const { clientX, clientY } = e;
+    const { innerWidth, innerHeight } = window;
+
+    // Calculate rotation (-5 to 5 degrees)
+    const rotateX = ((clientY / innerHeight) - 0.5) * -10;
+    const rotateY = ((clientX / innerWidth) - 0.5) * 10;
+
+    heroPhoto.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+  });
+
+  hero.addEventListener('mouseleave', () => {
+    heroPhoto.style.transform = `rotateX(0) rotateY(0) scale(1)`;
+  });
+}
+
 // --- Nav scroll effect ---
 if (nav) {
   const heroScroll = document.querySelector('.hero__scroll');
