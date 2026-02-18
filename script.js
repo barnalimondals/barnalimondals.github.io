@@ -28,12 +28,10 @@ if (hero && heroPhoto) {
   });
 }
 
-// --- Nav scroll effect ---
+// --- Nav & Scroll indicator effects ---
 if (nav) {
   const heroScroll = document.querySelector('.hero__scroll');
   window.addEventListener('scroll', () => {
-    const scrolled = window.scrollY > 50;
-    nav.classList.toggle('nav--scrolled', scrolled);
     if (heroScroll) {
       heroScroll.classList.toggle('is-hidden', window.scrollY > 100);
     }
