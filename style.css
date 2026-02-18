@@ -538,15 +538,10 @@ body.home .nav.nav--scrolled {
 }
 
 .explore__header {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 0 var(--space-xl);
     margin-bottom: var(--space-2xl);
 }
 
 .explore__grid {
-    max-width: var(--max-width);
-    margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: auto auto;
