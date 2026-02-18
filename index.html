@@ -1,327 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barnali Mondal | Research Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Barnali Mondal</title>
+    <meta name="description"
+        content="Barnali Mondal — Chemist, artist, wanderer, writer. Research Associate at IIT Bombay.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=Inter:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
+
+<body class="home">
+
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">BM</div>
-            <!-- Mobile Header -->
-            <div class="mobile-header">
-                <h1><span class="first-name">Barnali</span> <span class="last-name">Mondal</span></h1>
-            </div>
-            <div class="nav-links">
-                <a href="#about">About</a>
-                <a href="#education">Education</a>
-                <a href="#skills">Skills</a>
-                <a href="#awards">Awards</a>
-                <a href="#publications">Publications</a>
-                <a href="#projects">Research</a>
-            </div>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
+    <nav class="nav" id="nav">
+        <div class="nav__inner">
+            <a href="index.html" class="nav__logo">Barnali</a>
+            <ul class="nav__links">
+                <li><a href="research.html">Research</a></li>
+                <li><a href="museum.html">Museum</a></li>
+                <li><a href="travel.html">Travel</a></li>
+                <li><a href="snapshots.html">Snapshots</a></li>
+                <li><a href="writings.html">Writings</a></li>
+            </ul>
+            <button class="nav__hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </nav>
 
-    <!-- Mobile Bottom Navigation -->
-    <nav class="bottom-nav">
-        <div class="bottom-nav-container">
-            <a href="#about" class="nav-item active">
-                <i class="fas fa-user"></i>
-                <span>About</span>
-            </a>
-            <a href="#education" class="nav-item">
-                <i class="fas fa-graduation-cap"></i>
-                <span>Education</span>
-            </a>
-            <a href="#skills" class="nav-item">
-                <i class="fas fa-tools"></i>
-                <span>Skills</span>
-            </a>
-            <a href="#publications" class="nav-item">
-                <i class="fas fa-book"></i>
-                <span>Papers</span>
-            </a>
-            <a href="#projects" class="nav-item">
-                <i class="fas fa-flask"></i>
-                <span>Research</span>
-            </a>
-        </div>
-    </nav>
-
-    <!-- Dark Mode Toggle -->
-    <div class="theme-toggle">
-        <i class="fas fa-moon"></i>
+    <!-- Mobile menu -->
+    <div class="nav__mobile-menu">
+        <a href="research.html">Research</a>
+        <a href="museum.html">Museum</a>
+        <a href="travel.html">Travel</a>
+        <a href="snapshots.html">Snapshots</a>
+        <a href="writings.html">Writings</a>
     </div>
 
-    <main>
-        <!-- Hero Section -->
-        <section class="hero" id="about">
-            <h1><span class="first-name">Barnali</span> <span class="last-name">Mondal</span></h1>
-            <p class="institute">
-                Indian Institute of Science Education and Research Pune
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero__photo-col">
+            <div class="hero__photo-wrap">
+                <img class="hero__photo" src="assets/barnali.jpg" alt="Barnali Mondal">
+            </div>
+        </div>
+
+        <div class="hero__text-col">
+            <h1 class="hero__name">
+                <em>Barnali</em><br>Mondal
+            </h1>
+            <p class="hero__tagline">
+                <span>Chemist</span>·<span>Artist</span>·<span>Wanderer</span>·<span>Writer</span>
             </p>
-            
-            <!-- Desktop Contact Info -->
-            <div class="contact">
-                <div class="scholar">
-                    <i class="fas fa-graduation-cap"></i>
-                    <a href="https://scholar.google.co.in/citations?user=JZnmYAIAAAAJ&hl=en">Google Scholar</a>
-                </div>
-                <div class="email">
-                    <i class="fas fa-envelope"></i>
-                    <a href="mailto:mondal.barnali@students.iiserpune.ac.in" class="email-text">mondal.barnali@students.iiserpune.ac.in</a>
-                </div>
-            </div>
-            
-            <!-- Mobile Contact Items -->
-            <div class="contact-item scholar-item mobile-only">
-                <i class="fas fa-graduation-cap"></i>
-                <a href="https://scholar.google.co.in/citations?user=JZnmYAIAAAAJ&hl=en">Google Scholar</a>
-            </div>
-            <div class="contact-item email-item mobile-only">
-                <div class="email-wrapper">
-                    <i class="fas fa-envelope"></i>
-                    <div class="email-container">
-                        <a href="mailto:mondal.barnali@students.iiserpune.ac.in" class="email-text">mondal.barnali@students.iiserpune.ac.in</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Summary Section -->
-        <section class="summary" id="summary">
-            <h2>About Me</h2>
-            <p class="summary-text">
-                I have graduated recently from <a href="https://angshumaniiserpune.wixsite.com/grouppage">Prof. Angshuman Nag's lab</a>, at <a href="https://www.iiserpune.ac.in/">Indian Institute of Science Education and Research (IISER) Pune</a>, India. My PhD thesis is focused on synthesizing near infrared (NIR) light emitting perovskites for optoelectronic applications. My research interests include colloidal nanocrystal synthesis, material characterization, and optoelectronic device fabrication.
-            </p>
-        </section>
-
-        <!-- Education Section -->
-        <section class="education" id="education">
-            <h2>Education</h2>
-
-            <div class="wrapper">
-                <div class="left">
-                    2019 - 2025
-                </div>
-
-                <div class="right">
-                    <div class="degree">
-                        Doctor of Philosophy (Chemistry)
-                    </div>
-                    <div class="place">
-                        IISER Pune
-                    </div>
-                    <div class="percentage">
-                        Thesis Defended: February 2025
-                    </div>
-                    <div class="percentage">
-                        Guide: Prof. Angshuman Nag
-                    </div>
-                </div>
-            </div>
-
-            <div class="wrapper">
-                <div class="left">
-                    2017 - 2019
-                </div>
-
-                <div class="right">
-                    <div class="degree">
-                        Master of Science (Chemistry)
-                    </div>
-                    <div class="place">
-                        Indian Institute of Technology Guwahati
-                    </div>
-                    <div class="percentage">
-                        Percentage: 85.2
-                    </div>
-                </div>
-            </div>
-
-            <div class="wrapper">
-                <div class="left">
-                    2014 - 2017
-                </div>
-
-                <div class="right">
-                    <div class="degree">
-                        Bachelor of Science (Chemistry)
-                    </div>
-                    <div class="place">
-                        Krishnath College, University of Kalyani
-                    </div>
-                    <div class="percentage">
-                        Percentage: 69.75
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Skills Section -->
-        <section class="skills" id="skills">
-            <h2>Skills</h2>
-            
-            <div class="skills-container">
-                <div class="skill-card">
-                    <h3><i class="fas fa-flask"></i> Synthesis</h3>
-                    <p>Colloidal nanocrystals and perovskite microcrystals with hydrothermal, and hot-injection methods.</p>
-                </div>
-
-                <div class="skill-card">
-                    <h3><i class="fas fa-microscope"></i> Characterization</h3>
-                    <p>X-ray diffraction, Rietveld refinement, analysis of scanning electron microscopy (SEM), transmission electron microscopy (TEM), and atomic force microscopy (AFM) data.</p>
-                </div>
-
-                <div class="skill-card">
-                    <h3><i class="fas fa-lightbulb"></i> Optical Analysis</h3>
-                    <p>Temperature dependent photoluminescence spectroscopy and photophysics study.</p>
-                </div>
-
-                <div class="skill-card">
-                    <h3><i class="fas fa-microchip"></i> Device Fabrication</h3>
-                    <p>NIR phosphor converted light emitting diode (pc-LED) fabrication and their measurements.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Awards Section -->
-        <section class="awards" id="awards">
-            <h2>Awards</h2>
-            
-            <div class="wrapper">
-                <div class="left">
-                    December 2023
-                </div>
-
-                <div class="right">
-                    <div class="degree">Best Poster Award</div>
-                    <div class="place">
-                        Hybrid Perovskite (Hype-23) Conference at IACS Kolkata.
-                    </div>
-                </div>
-            </div>
-
-            <div class="wrapper">
-                <div class="left">
-                    October 2019
-                </div>
-
-                <div class="right">
-                    <div class="degree">CSIR Junior Research Fellowship</div>
-                    <div class="place">
-                        Council of Scientific and Industrial Research (CSIR) Junior Research Fellowship (JRF) award with all India rank 137.
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Publications Section -->
-        <section class="publications" id="publications">
-            <h2>Publications</h2>
-
-            <div class="publication">
-                <a href="https://pubs.acs.org/doi/10.1021/acsenergylett.5c01727">
-                    <span class="bold">10. </span> Sarma, M.; <span class="bold">Mondal, B.</span>; Teotia, Y.; Adarsh, K. V.; Nag, A. Defect-Mediated Exciton Storage in Ag–In–Ga–S Nanocrystals. <em>ACS Energy Lett.</em> <span class="bold"> 2025</span>, 10, 3892-3899.
+            <div class="hero__contacts">
+                <a href="mailto:mondal.barnali@students.iiserpune.ac.in" class="hero__contact-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <rect x="2" y="4" width="20" height="16" rx="2" />
+                        <path d="m2 7 10 7 10-7" />
+                    </svg>
+                    mondal.barnali@students.iiserpune.ac.in
+                </a>
+                <a href="https://scholar.google.co.in/citations?user=JZnmYAIAAAAJ&hl=en" target="_blank" rel="noopener"
+                    class="hero__contact-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M22 10v6M2 10l10-8 10 8M6 12v8h12v-8" />
+                    </svg>
+                    Google Scholar
                 </a>
             </div>
+        </div>
+    </section>
 
-            <div class="publication">
-                <a href="https://pubs.acs.org/doi/10.1021/acs.jpclett.5c00822">
-                    <span class="bold">9. </span> <span class="bold">Mondal, B.</span>; Mehta, S;  Mondal, A.; Nag, A. W-Doped Cs<sub>2</sub>SnCl<sub>6</sub> for Near-Infrared Emission. <em>J. Phys. Chem. Lett.</em> <span class="bold"> 2025</span>, 16, 4937-4943.
-                </a>
-            </div>
-            
-            <div class="publication">
-                <a href="https://pubs.acs.org/doi/10.1021/acsenergylett.3c02613">
-                    <span class="bold">8. </span> <span class="bold">Mondal, B.</span>; Shinde, A.; Rajput, P. K.; Arfin, H.; Tanwar, R.; Ghosh, P.; Nag, A. Vibronically Coupled Near-Infrared Emission and Excitation from d−d Transitions of Cs<sub>2</sub>MX<sub>6</sub> (M = Mo/W, X = Cl/Br). <em>ACS Energy Lett.</em> <span class="bold"> 2024</span>, 9, 819-824.
-                </a>
-            </div>
+    <!-- Explore Grid -->
+    <section class="explore">
+        <div class="explore__header reveal">
+            <span class="label">Explore</span>
+        </div>
 
-            <div class="publication">
-                <a href="https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.132.063803">
-                    <span class="bold">7. </span> Poonia, A. K.; <span class="bold">Mondal, B.</span>; Beard, M. C.; Nag, A.; Adarsh, K. V. Superfluorescence from Electron-Hole Plasma at Moderate Temperatures of 175 K. <em>Phys. Rev. Lett.</em> <span class="bold">2024</span>, 132 (6), No. 063803.
-                </a>
-            </div>
+        <div class="explore__grid">
 
-            <div class="publication">
-                <a href="https://journals.aps.org/prapplied/abstract/10.1103/PhysRevApplied.20.L021002">
-                    <span class="bold">6. </span> Poonia, A. K.; Yadav, P.; <span class="bold">Mondal, B.</span>; Mandal, D.; Taank, P.; Shrivastava, M.; Nag, A.; Agarwal, A.; Adarsh, K. V. Room-Temperature Electron-Hole Condensation in Direct-Band-Gap Semiconductor Nanocrystals. <em>Phys. Rev. Appl.</em> <span class="bold">2023</span>, 20, L021002.
-                </a>
-            </div>
-
-            <div class="publication">
-                <a href="https://aces.onlinelibrary.wiley.com/doi/abs/10.1002/cnma.202200104">
-                    <span class="bold">5. </span><span class="bold">Mondal, B.</span>; Poovathan, A.; Sheikh, T.; Nag, A. Yb<sup>3+</sup>-Doped Phenylethylammonium Lead Bromide 2D Layered Hybrid Perovskite for Near-Infrared Emission. <em>ChemNanoMat</em> <span class="bold">2022</span>, 8, e202200104.
-                </a>
-            </div>
-
-            <div class="publication">
-                <a href="https://pubs.acs.org/doi/10.1021/acs.jpcc.1c08720">
-                    <span class="bold">4. </span>Kshirsagar, A. S.; Arfin, H.; Banerjee, S.; <span class="bold">Mondal, B.</span>; Nag, A. Colloidal Sb<sup>3+</sup>-Doped Cs<sub>2</sub>InCl<sub>5</sub>·H<sub>2</sub>O Perovskite Nanocrystals with Temperature-Dependent Luminescence. <em>J. Phys. Chem. C</em> <span class="bold">2021</span>, 125, 27671-27677.
-                </a>
-            </div>
-
-            <div class="publication">
-                <a href="https://pubs.acs.org/doi/10.1021/acsomega.0c04599">
-                    <span class="bold">3. </span>Ravi, V. K.; <span class="bold">Mondal, B.</span>; Nawale, V. V.; Nag, A. Don't Let the Lead Out: New Material Chemistry Approaches for Sustainable Lead Halide Perovskite Solar Cells. <em>ACS. Omega</em><span class="bold"> 2020</span>, 5 (46), 29631–29641.
-                </a>
-            </div>
-
-            <div class="publication">
-                <a href="https://pubs.acs.org/doi/10.1021/acs.chemmater.0c03394">
-                    <span class="bold">2. </span>Arfin, H.; Kshirsagar, A. S.; Kaur, J.; <span class="bold">Mondal, B.</span>; Xia, Z. G.; Chakraborty, S.; Nag, A. ns<sup>2</sup> Electron (Bi<sup>3+</sup> and Sb<sup>3+</sup>) Doping in Lead-Free Metal Halide Perovskite Derivatives. <em>Chem. Mater.</em> <span class="bold">2020</span>, 32, 10255–10267.
-                </a>
-            </div>
-            
-            <div class="publication">
-                <a href="https://pubs.rsc.org/en/content/articlelanding/2019/ta/c9ta01423c">
-                    <span class="bold">1. </span>Jana, N.; Parbat, D.; <span class="bold">Mondal, B.</span>; Das, S.; Manna, U. A Biodegradable Polymer-based Common Chemical Avenue for Optimizing Switchable, Chemically Reactive and Tunable Adhesive Superhydrophobicity. <em> J. Mater. Chem. A</em> <span class="bold">2019</span>, 7 (15), 9120–9129.
-                </a>
-            </div>
-        </section>
-
-        <!-- Research Highlights/Projects Section -->
-        <section class="projects" id="projects">
-            <h2>Research Highlights</h2>
-            
-            <div class="skills-container">
-                <div class="skill-card">
-                    <h3><i class="fas fa-lightbulb"></i> NIR Light Emitting Perovskites</h3>
-                    <p>Development of tungsten and molybdenum-doped perovskites for near-infrared emission with potential applications in night vision and bioimaging.</p>
+            <!-- Research -->
+            <a href="research.html" class="explore-card reveal">
+                <div class="explore-card__number">01</div>
+                <div>
+                    <div class="explore-card__title">The Lab</div>
+                    <div class="explore-card__desc">Research · Chemistry · IIT Bombay</div>
                 </div>
-                
-                <div class="skill-card">
-                    <h3><i class="fas fa-layer-group"></i> 2D Layered Perovskites</h3>
-                    <p>Synthesis and characterization of novel 2D layered hybrid perovskite materials with enhanced optical properties.</p>
+                <div class="explore-card__arrow">
+                    Enter
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
                 </div>
-                
-                <div class="skill-card">
-                    <h3><i class="fas fa-microchip"></i> LED Device Fabrication</h3>
-                    <p>Design and implementation of phosphor-converted light emitting diodes utilizing synthesized NIR emitting materials.</p>
-                </div>
-            </div>
-        </section>
+            </a>
 
-        <footer>
-            <p>&copy; 2025 Barnali Mondal. All rights reserved.</p>
-        </footer>
-    </main>
-    
-    <!-- JavaScript -->
+            <!-- Museum -->
+            <a href="museum.html" class="explore-card reveal reveal-delay-1">
+                <div class="explore-card__number">02</div>
+                <div>
+                    <div class="explore-card__title">The Studio</div>
+                    <div class="explore-card__desc">Drawings · Paintings · Art</div>
+                </div>
+                <div class="explore-card__arrow">
+                    Enter
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </div>
+            </a>
+
+            <!-- Travel -->
+            <a href="travel.html" class="explore-card reveal reveal-delay-2">
+                <div class="explore-card__number">03</div>
+                <div>
+                    <div class="explore-card__title">The Road</div>
+                    <div class="explore-card__desc">Travel · Places · Wanderings</div>
+                </div>
+                <div class="explore-card__arrow">
+                    Enter
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </div>
+            </a>
+
+            <!-- Snapshots -->
+            <a href="snapshots.html" class="explore-card reveal reveal-delay-3">
+                <div class="explore-card__number">04</div>
+                <div>
+                    <div class="explore-card__title">Moments</div>
+                    <div class="explore-card__desc">Life · Frames · Memories</div>
+                </div>
+                <div class="explore-card__arrow">
+                    Enter
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </div>
+            </a>
+
+            <!-- Writings — wide card -->
+            <a href="writings.html" class="explore-card reveal reveal-delay-4">
+                <div class="explore-card__number">05</div>
+                <div class="explore-card__body">
+                    <div class="explore-card__title">Writings</div>
+                    <div class="explore-card__desc">Essays · Thoughts · Words</div>
+                </div>
+                <div class="explore-card__arrow">
+                    Enter
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </div>
+            </a>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer__inner">
+            <span class="footer__copy">© 2025 Barnali Mondal</span>
+            <div class="footer__links">
+                <a href="mailto:mondal.barnali@students.iiserpune.ac.in">Email</a>
+                <a href="https://scholar.google.co.in/citations?user=JZnmYAIAAAAJ&hl=en" target="_blank"
+                    rel="noopener">Scholar</a>
+            </div>
+        </div>
+    </footer>
+
     <script src="script.js"></script>
 </body>
+
 </html>

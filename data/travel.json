@@ -1,0 +1,33 @@
+{
+    "title": "The Road",
+    "subtitle": "Places & wanderings",
+    "items": [
+        {
+            "id": "001",
+            "title": "Spiti Valley",
+            "location": "Himachal Pradesh, India",
+            "date": "October 2023",
+            "coverImage": "",
+            "excerpt": "Cold desert, ancient monasteries, and the clearest skies I have ever seen. The kind of place that makes you feel very small and very alive at the same time.",
+            "photos": []
+        },
+        {
+            "id": "002",
+            "title": "Kolkata in Monsoon",
+            "location": "West Bengal, India",
+            "date": "July 2022",
+            "coverImage": "",
+            "excerpt": "Rain on old buildings, the smell of petrichor on hot stone, and the particular quality of light that only exists in a city that has been loved for centuries.",
+            "photos": []
+        },
+        {
+            "id": "003",
+            "title": "Coorg",
+            "location": "Karnataka, India",
+            "date": "December 2021",
+            "coverImage": "",
+            "excerpt": "Coffee estates, mist-covered hills, and the sound of rain on a tin roof. A slow, quiet kind of travel.",
+            "photos": []
+        }
+    ]
+}

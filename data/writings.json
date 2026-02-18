@@ -1,0 +1,39 @@
+{
+    "title": "Writings",
+    "subtitle": "Thoughts & essays",
+    "items": [
+        {
+            "id": "001",
+            "title": "On the colour of perovskites",
+            "date": "January 2025",
+            "tags": [
+                "science",
+                "wonder"
+            ],
+            "excerpt": "There is something deeply satisfying about a material that glows. Not the glow of a screen or a bulb, but the glow of something that has absorbed light and decided, in its own time, to give it back.",
+            "content": ""
+        },
+        {
+            "id": "002",
+            "title": "What the lab teaches you about patience",
+            "date": "September 2024",
+            "tags": [
+                "science",
+                "life"
+            ],
+            "excerpt": "A synthesis that takes eight hours teaches you something that no book can. You learn to wait without anxiety. You learn that the outcome is not entirely yours to control.",
+            "content": ""
+        },
+        {
+            "id": "003",
+            "title": "Notes from a cold desert",
+            "date": "November 2023",
+            "tags": [
+                "travel",
+                "reflection"
+            ],
+            "excerpt": "In Spiti, the silence is so complete that you begin to hear things you normally cannot — your own breathing, the creak of your boots on frozen ground, the particular frequency of your own thoughts.",
+            "content": ""
+        }
+    ]
+}

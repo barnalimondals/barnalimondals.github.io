@@ -1,0 +1,60 @@
+{
+  "title": "The Studio",
+  "subtitle": "Drawings & paintings",
+  "items": [
+    {
+      "id": "001",
+      "title": "Untitled No. 1",
+      "medium": "Watercolour on paper",
+      "year": "2024",
+      "image": "",
+      "placeholderHeight": 380,
+      "description": ""
+    },
+    {
+      "id": "002",
+      "title": "Study in Blue",
+      "medium": "Pencil on paper",
+      "year": "2023",
+      "image": "",
+      "placeholderHeight": 260,
+      "description": ""
+    },
+    {
+      "id": "003",
+      "title": "Evening Light",
+      "medium": "Watercolour on paper",
+      "year": "2023",
+      "image": "",
+      "placeholderHeight": 320,
+      "description": ""
+    },
+    {
+      "id": "004",
+      "title": "Botanical",
+      "medium": "Ink on paper",
+      "year": "2022",
+      "image": "",
+      "placeholderHeight": 420,
+      "description": ""
+    },
+    {
+      "id": "005",
+      "title": "Quiet Corner",
+      "medium": "Watercolour on paper",
+      "year": "2022",
+      "image": "",
+      "placeholderHeight": 300,
+      "description": ""
+    },
+    {
+      "id": "006",
+      "title": "Abstract I",
+      "medium": "Mixed media",
+      "year": "2021",
+      "image": "",
+      "placeholderHeight": 350,
+      "description": ""
+    }
+  ]
+}

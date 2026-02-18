@@ -1,400 +1,241 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Super simple dark mode implementation
-    const themeToggle = document.querySelector('.theme-toggle');
-    const icon = themeToggle.querySelector('i');
-    
-    // Check if dark mode was previously enabled
-    if (localStorage.getItem('darkMode') === 'enabled') {
-        document.body.classList.add('dark-mode');
-        icon.className = 'fas fa-sun';
-    } else {
-        icon.className = 'fas fa-moon';
+/* ============================================================
+   BARNALI MONDAL — Global JavaScript
+   ============================================================ */
+
+// --- Nav scroll effect ---
+const nav = document.querySelector('.nav');
+const hamburger = document.querySelector('.nav__hamburger');
+const mobileMenu = document.querySelector('.nav__mobile-menu');
+
+// --- Nav scroll effect ---
+if (nav) {
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('nav--scrolled', window.scrollY > 50);
+  }, { passive: true });
+}
+
+// --- Hamburger menu ---
+if (hamburger && mobileMenu) {
+  hamburger.addEventListener('click', () => {
+    const isOpen = hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+}
+
+// --- Scroll reveal ---
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
     }
-    
-    // Toggle dark mode on click
-    themeToggle.addEventListener('click', function() {
-        document.body.classList.toggle('dark-mode');
-        
-        // Update localStorage
-        if (document.body.classList.contains('dark-mode')) {
-            localStorage.setItem('darkMode', 'enabled');
-            icon.className = 'fas fa-sun';
-        } else {
-            localStorage.setItem('darkMode', 'disabled');
-            icon.className = 'fas fa-moon';
-        }
-        
-        // Add animation effect
-        themeToggle.classList.add('clicked');
-        setTimeout(() => {
-            themeToggle.classList.remove('clicked');
-        }, 300);
-    });
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-    // Mobile Navigation
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    
-    if (hamburger) {
-        hamburger.addEventListener('click', function() {
-            navLinks.classList.toggle('active');
-            hamburger.classList.toggle('active');
-        });
+function observeReveal(root = document) {
+  root.querySelectorAll('.reveal:not(.visible)').forEach(el => revealObserver.observe(el));
+}
+
+observeReveal();
+
+// --- Active nav link (for single-page sections) ---
+function setActiveNavLink() {
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.nav__links a, .nav__mobile-menu a').forEach(link => {
+    const href = link.getAttribute('href');
+    if (href === currentPage || (currentPage === '' && href === 'index.html')) {
+      link.classList.add('active');
     }
-    
-    // Bottom Navigation Active State
-    const sections = document.querySelectorAll('section');
-    const bottomNavItems = document.querySelectorAll('.bottom-nav-container .nav-item');
-    const desktopNavItems = document.querySelectorAll('.nav-links a');
-    
-    function setActiveNavItem() {
-        let currentSection = '';
-        
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            if (window.scrollY >= (sectionTop - sectionHeight/3)) {
-                currentSection = section.getAttribute('id');
-            }
-        });
-        
-        // Update bottom nav
-        bottomNavItems.forEach(item => {
-            item.classList.remove('active');
-            if (item.getAttribute('href') === '#' + currentSection) {
-                item.classList.add('active');
-            }
-        });
-        
-        // Update desktop nav
-        desktopNavItems.forEach(item => {
-            item.classList.remove('active');
-            if (item.getAttribute('href') === '#' + currentSection) {
-                item.classList.add('active');
-            }
-        });
+  });
+}
+setActiveNavLink();
+
+// --- Sidebar active link (research page) ---
+function initSidebarNav() {
+  const sidebarLinks = document.querySelectorAll('.research-sidebar__nav a');
+  if (!sidebarLinks.length) return;
+
+  const sections = Array.from(sidebarLinks).map(link => {
+    const id = link.getAttribute('href').replace('#', '');
+    return document.getElementById(id);
+  }).filter(Boolean);
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        sidebarLinks.forEach(l => l.classList.remove('active'));
+        const activeLink = document.querySelector(`.research-sidebar__nav a[href="#${entry.target.id}"]`);
+        if (activeLink) activeLink.classList.add('active');
+      }
+    });
+  }, { threshold: 0.3, rootMargin: '-80px 0px -60% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+}
+initSidebarNav();
+
+// ============================================================
+// DYNAMIC CONTENT LOADER
+// ============================================================
+
+/**
+ * Fetch a JSON config file and render content into the page.
+ * @param {string} configPath - Path to the JSON file (e.g. 'data/museum.json')
+ * @param {string} containerId - ID of the DOM element to render into
+ * @param {Function} renderFn - Function(data) that returns an HTML string
+ */
+async function loadDynamicContent(configPath, containerId, renderFn) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  container.innerHTML = '<div class="loading-state">Loading…</div>';
+
+  try {
+    const res = await fetch(configPath);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    container.innerHTML = renderFn(data);
+    // Re-observe any .reveal elements injected by the renderer
+    observeReveal(container);
+  } catch (err) {
+    console.warn('Could not load content:', configPath, err);
+    container.innerHTML = `
+      <div class="empty-state">
+        <p class="empty-state__title">Nothing here yet.</p>
+        <p class="empty-state__desc">Check back soon.</p>
+      </div>`;
+  }
+}
+
+// ============================================================
+// MUSEUM RENDERER
+// ============================================================
+
+function renderMuseum(data) {
+  if (!data.items || data.items.length === 0) {
+    return `<div class="empty-state">
+      <p class="empty-state__title">The studio is quiet for now.</p>
+      <p class="empty-state__desc">Works coming soon.</p>
+    </div>`;
+  }
+
+  return data.items.map(item => `
+    <div class="gallery-item reveal">
+      ${item.image
+      ? `<img src="${item.image}" alt="${item.title}" loading="lazy">`
+      : `<div class="gallery-placeholder" style="height:${item.placeholderHeight || 280}px">${item.title}</div>`
     }
-    
-    window.addEventListener('scroll', setActiveNavItem);
-    window.addEventListener('load', setActiveNavItem);
+      <div class="gallery-item__caption">
+        <div class="gallery-item__title">${item.title}</div>
+        <div class="gallery-item__meta">${item.medium || ''}${item.year ? ' · ' + item.year : ''}</div>
+      </div>
+    </div>
+  `).join('');
+}
 
-    // Add smooth scrolling to all links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // Close mobile menu if open
-            if (hamburger && hamburger.classList.contains('active')) {
-                navLinks.classList.remove('active');
-                hamburger.classList.remove('active');
-            }
-            
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            
-            if (targetElement) {
-                const headerOffset = 70; // Adjust based on your header height
-                const elementPosition = targetElement.offsetTop;
-                const offsetPosition = elementPosition - headerOffset;
-                
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
+// ============================================================
+// TRAVEL RENDERER
+// ============================================================
 
-    // Add scroll animation to elements
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.15
-    };
+function renderTravel(data) {
+  if (!data.items || data.items.length === 0) {
+    return `<div class="empty-state">
+      <p class="empty-state__title">No journeys logged yet.</p>
+      <p class="empty-state__desc">The road awaits.</p>
+    </div>`;
+  }
 
-    const observer = new IntersectionObserver(function(entries, observer) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Add in-view class to make element visible
-                entry.target.classList.add('in-view');
-                
-                // If it's a section, animate its children with staggered delay
-                if (entry.target.tagName.toLowerCase() === 'section') {
-                    const children = entry.target.querySelectorAll('.skill-card, .publication, .wrapper');
-                    children.forEach((child, index) => {
-                        setTimeout(() => {
-                            child.classList.add('in-view');
-                        }, 100 * (index + 1));
-                    });
-                }
-                
-                // Stop observing after animation
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-
-    // Observe all elements that should animate
-    document.querySelectorAll('section, .contact-item.mobile-only').forEach(el => {
-        observer.observe(el);
-    });
-    
-    // Add touch effects for mobile
-    const touchElements = document.querySelectorAll('.skill-card, .publication, .contact div, .theme-toggle');
-    
-    touchElements.forEach(element => {
-        element.addEventListener('touchstart', () => {
-            element.classList.add('touch-active');
-        }, { passive: true });
-        
-        element.addEventListener('touchend', () => {
-            element.classList.remove('touch-active');
-        }, { passive: true });
-    });
-    
-    // Separate observer for mobile contact items with different timing
-    const contactObserver = new IntersectionObserver(function(entries, observer) {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                // Add small delay before starting animation
-                setTimeout(() => {
-                    entry.target.classList.add('in-view');
-                }, 300 + (200 * index));
-                observer.unobserve(entry.target);
-            }
-        });
-    }, {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.2
-    });
-
-    // Observe mobile contact items
-    document.querySelectorAll('.contact-item.mobile-only').forEach(el => {
-        contactObserver.observe(el);
-    });
-
-    // Enhanced hover effects for desktop
-    if (window.innerWidth >= 769) {
-        // Add hover effect for skill cards
-        const skillCards = document.querySelectorAll('.skill-card');
-        skillCards.forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                const icon = this.querySelector('i');
-                const heading = this.querySelector('h3');
-                const paragraph = this.querySelector('p');
-                
-                if (icon) {
-                    icon.style.transition = 'transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-                    icon.style.transform = 'scale(1.2) translateY(-5px)';
-                }
-                
-                // Add staggered animation to heading and paragraph
-                if (heading) {
-                    heading.style.transition = 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.3s ease';
-                    heading.style.transform = 'translateY(-5px)';
-                    heading.style.color = getComputedStyle(document.documentElement).getPropertyValue('--primary-color').trim();
-                }
-                
-                if (paragraph) {
-                    setTimeout(() => {
-                        paragraph.style.transition = 'transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-                        paragraph.style.transform = 'translateY(-3px)';
-                    }, 100);
-                }
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                const icon = this.querySelector('i');
-                const heading = this.querySelector('h3');
-                const paragraph = this.querySelector('p');
-                
-                if (icon) {
-                    icon.style.transform = 'scale(1) translateY(0)';
-                }
-                
-                if (heading) {
-                    heading.style.transform = 'translateY(0)';
-                    heading.style.color = '';
-                }
-                
-                if (paragraph) {
-                    paragraph.style.transform = 'translateY(0)';
-                }
-            });
-        });
-        
-        // Add hover effect for publications
-        const publications = document.querySelectorAll('.publication');
-        publications.forEach(pub => {
-            pub.addEventListener('mouseenter', function() {
-                this.style.transition = 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease';
-                this.style.zIndex = '1';
-                
-                // Add subtle movement to the text and force color change
-                const link = this.querySelector('a');
-                if (link) {
-                    // Force color change directly
-                    link.style.color = document.body.classList.contains('dark-mode') ? '#bd5cff' : '#bd5cff';
-                    link.style.textShadow = '0 0 8px rgba(189, 92, 255, 0.3)';
-                    link.style.transition = 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.3s ease, text-shadow 0.3s ease';
-                    link.style.display = 'inline-block';
-                    link.style.transform = 'translateX(5px)';
-                    
-                    // Also apply to all spans and em elements inside
-                    const spans = link.querySelectorAll('span, em, sub');
-                    spans.forEach(span => {
-                        span.style.color = document.body.classList.contains('dark-mode') ? '#bd5cff' : '#bd5cff';
-                        span.style.transition = 'color 0.3s ease';
-                    });
-                }
-            });
-            
-            pub.addEventListener('mouseleave', function() {
-                this.style.zIndex = '0';
-                
-                const link = this.querySelector('a');
-                if (link) {
-                    link.style.transform = 'translateX(0)';
-                    link.style.color = '';
-                    link.style.textShadow = '';
-                    
-                    // Reset spans and em elements
-                    const spans = link.querySelectorAll('span, em, sub');
-                    spans.forEach(span => {
-                        span.style.color = '';
-                    });
-                    
-                    // Stop any animations
-                    const animations = link.getAnimations();
-                    animations.forEach(animation => animation.cancel());
-                }
-            });
-        });
-        
-        // Add magnetic effect to the logo
-        const logo = document.querySelector('.logo');
-        if (logo) {
-            logo.addEventListener('mousemove', function(e) {
-                const bounds = this.getBoundingClientRect();
-                const mouseX = e.clientX - bounds.left;
-                const mouseY = e.clientY - bounds.top;
-                const centerX = bounds.width / 2;
-                const centerY = bounds.height / 2;
-                const maxDistance = 10;
-                
-                const moveX = (mouseX - centerX) / centerX * maxDistance;
-                const moveY = (mouseY - centerY) / centerY * maxDistance;
-                
-                this.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.1)`;
-            });
-            
-            logo.addEventListener('mouseleave', function() {
-                this.style.transform = 'translate(0, 0) scale(1)';
-            });
-        }
-        
-        // Add subtle parallax effect to sections
-        const allSections = document.querySelectorAll('section');
-        allSections.forEach(section => {
-            section.addEventListener('mousemove', function(e) {
-                // Only apply to desktop and if section is in view
-                if (window.innerWidth >= 769 && this.classList.contains('in-view')) {
-                    const sectionRect = this.getBoundingClientRect();
-                    const sectionWidth = sectionRect.width;
-                    const sectionHeight = sectionRect.height;
-                    
-                    // Calculate mouse position relative to section center
-                    const mouseX = e.clientX - sectionRect.left;
-                    const mouseY = e.clientY - sectionRect.top;
-                    
-                    // Calculate percentage from center (-50 to 50)
-                    const xPercent = ((mouseX / sectionWidth) - 0.5) * 100;
-                    const yPercent = ((mouseY / sectionHeight) - 0.5) * 100;
-                    
-                    // Apply subtle rotation and movement
-                    const maxTilt = 0.5; // degrees
-                    const maxMove = 5; // pixels
-                    
-                    this.style.transform = `perspective(1000px) 
-                                          rotateX(${-yPercent * (maxTilt/50)}deg) 
-                                          rotateY(${xPercent * (maxTilt/50)}deg)
-                                          translateX(${xPercent * (maxMove/50)}px)
-                                          translateY(${yPercent * (maxMove/50)}px)`;
-                    
-                    // Move elements inside the section with a parallax effect
-                    const cards = this.querySelectorAll('.skill-card, .publication, .wrapper');
-                    cards.forEach(card => {
-                        // Create a subtle parallax effect for inner elements
-                        const depth = 0.05; // Adjust for more/less movement
-                        card.style.transform = `translate(${-xPercent * depth}px, ${-yPercent * depth}px)`;
-                    });
-                }
-            });
-            
-            section.addEventListener('mouseleave', function() {
-                // Reset transform when mouse leaves
-                this.style.transform = '';
-                
-                // Reset all cards inside
-                const cards = this.querySelectorAll('.skill-card, .publication, .wrapper');
-                cards.forEach(card => {
-                    card.style.transform = '';
-                });
-            });
-        });
-        
-        // Add hover effect to education cards
-        const educationCards = document.querySelectorAll('.wrapper');
-        educationCards.forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                const degree = this.querySelector('.degree');
-                const place = this.querySelector('.place');
-                const percentages = this.querySelectorAll('.percentage');
-                
-                if (degree) {
-                    degree.style.transition = 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.3s ease';
-                    degree.style.transform = 'translateY(-3px)';
-                    degree.style.color = getComputedStyle(document.documentElement).getPropertyValue('--primary-color').trim();
-                }
-                
-                if (place) {
-                    setTimeout(() => {
-                        place.style.transition = 'transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-                        place.style.transform = 'translateY(-2px)';
-                    }, 100);
-                }
-                
-                if (percentages.length) {
-                    percentages.forEach((percentage, index) => {
-                        setTimeout(() => {
-                            percentage.style.transition = 'transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-                            percentage.style.transform = 'translateY(-1px)';
-                        }, 150 + (index * 50));
-                    });
-                }
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                const degree = this.querySelector('.degree');
-                const place = this.querySelector('.place');
-                const percentages = this.querySelectorAll('.percentage');
-                
-                if (degree) {
-                    degree.style.transform = 'translateY(0)';
-                    degree.style.color = '';
-                }
-                
-                if (place) {
-                    place.style.transform = 'translateY(0)';
-                }
-                
-                if (percentages.length) {
-                    percentages.forEach(percentage => {
-                        percentage.style.transform = 'translateY(0)';
-                    });
-                }
-            });
-        });
+  return data.items.map(item => `
+    <div class="travel-entry reveal">
+      <div class="travel-entry__photo">
+        ${item.coverImage
+      ? `<img src="${item.coverImage}" alt="${item.title}" loading="lazy">`
+      : `<div style="width:100%;height:100%;background:var(--stone-100);display:flex;align-items:center;justify-content:center;color:var(--stone-300);font-family:var(--font-serif);font-style:italic;font-size:1rem;">${item.location || 'Somewhere'}</div>`
     }
-}); 
+      </div>
+      <div class="travel-entry__content">
+        <div class="travel-entry__location">${item.location || ''}</div>
+        <h2 class="travel-entry__title">${item.title}</h2>
+        <div class="travel-entry__date">${item.date || ''}</div>
+        <p class="travel-entry__excerpt">${item.excerpt || ''}</p>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ============================================================
+// SNAPSHOTS RENDERER
+// ============================================================
+
+function renderSnapshots(data) {
+  if (!data.items || data.items.length === 0) {
+    return `<div class="empty-state">
+      <p class="empty-state__title">No moments captured yet.</p>
+    </div>`;
+  }
+
+  return data.items.map(item => `
+    <div class="snapshot-item reveal">
+      ${item.image
+      ? `<img src="${item.image}" alt="${item.caption || ''}" loading="lazy">`
+      : `<div style="width:100%;height:100%;background:var(--stone-100);"></div>`
+    }
+      <div class="snapshot-item__overlay">
+        <span class="snapshot-item__caption">${item.caption || ''}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ============================================================
+// WRITINGS RENDERER
+// ============================================================
+
+function renderWritings(data) {
+  if (!data.items || data.items.length === 0) {
+    return `<div class="empty-state">
+      <p class="empty-state__title">No essays yet.</p>
+      <p class="empty-state__desc">Thoughts are brewing.</p>
+    </div>`;
+  }
+
+  return data.items.map(item => `
+    <div class="writing-item reveal">
+      ${item.tags && item.tags.length ? `
+        <div class="writing-item__tags">
+          ${item.tags.map(t => `<span class="writing-item__tag">${t}</span>`).join('')}
+        </div>` : ''}
+      <h2 class="writing-item__title">${item.title}</h2>
+      <div class="writing-item__date">${item.date || ''}</div>
+      <p class="writing-item__excerpt">${item.excerpt || ''}</p>
+    </div>
+  `).join('');
+}
+
+// ============================================================
+// PAGE-SPECIFIC INIT
+// ============================================================
+
+const page = window.location.pathname.split('/').pop() || 'index.html';
+
+if (page === 'museum.html') {
+  loadDynamicContent('data/museum.json', 'museum-container', renderMuseum);
+}
+if (page === 'travel.html') {
+  loadDynamicContent('data/travel.json', 'travel-container', renderTravel);
+}
+if (page === 'snapshots.html') {
+  loadDynamicContent('data/snapshots.json', 'snapshots-container', renderSnapshots);
+}
+if (page === 'writings.html') {
+  loadDynamicContent('data/writings.json', 'writings-container', renderWritings);
+}
