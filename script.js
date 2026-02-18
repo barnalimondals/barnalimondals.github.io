@@ -9,8 +9,13 @@ const mobileMenu = document.querySelector('.nav__mobile-menu');
 
 // --- Nav scroll effect ---
 if (nav) {
+  const heroScroll = document.querySelector('.hero__scroll');
   window.addEventListener('scroll', () => {
-    nav.classList.toggle('nav--scrolled', window.scrollY > 50);
+    const scrolled = window.scrollY > 50;
+    nav.classList.toggle('nav--scrolled', scrolled);
+    if (heroScroll) {
+      heroScroll.classList.toggle('is-hidden', window.scrollY > 100);
+    }
   }, { passive: true });
 }
 
@@ -227,13 +232,13 @@ function renderWritings(data) {
 
 const page = window.location.pathname.split('/').pop() || 'index.html';
 
-if (page === 'museum.html') {
+if (page === 'the-studio.html') {
   loadDynamicContent('data/museum.json', 'museum-container', renderMuseum);
 }
-if (page === 'travel.html') {
+if (page === 'the-road.html') {
   loadDynamicContent('data/travel.json', 'travel-container', renderTravel);
 }
-if (page === 'snapshots.html') {
+if (page === 'moments.html') {
   loadDynamicContent('data/snapshots.json', 'snapshots-container', renderSnapshots);
 }
 if (page === 'writings.html') {

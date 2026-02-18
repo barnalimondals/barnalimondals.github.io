@@ -4,13 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snapshots — Barnali Mondal</title>
-    <meta name="description" content="Moments — life in frames by Barnali Mondal.">
+    <title>The Road — Barnali Mondal</title>
+    <meta name="description" content="The Road — travel logs and wanderings by Barnali Mondal.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=Inter:wght@300;400;500&display=swap"
         rel="stylesheet">
+    <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -21,10 +22,10 @@
         <div class="nav__inner">
             <a href="index.html" class="nav__logo">Barnali</a>
             <ul class="nav__links">
-                <li><a href="research.html">Research</a></li>
-                <li><a href="museum.html">Museum</a></li>
-                <li><a href="travel.html">Travel</a></li>
-                <li><a href="snapshots.html" class="active">Snapshots</a></li>
+                <li><a href="the-lab.html">The Lab</a></li>
+                <li><a href="the-studio.html">The Studio</a></li>
+                <li><a href="the-road.html" class="active">The Road</a></li>
+                <li><a href="moments.html">Moments</a></li>
                 <li><a href="writings.html">Writings</a></li>
             </ul>
             <button class="nav__hamburger" aria-label="Menu">
@@ -35,27 +36,27 @@
 
     <!-- Mobile menu -->
     <div class="nav__mobile-menu">
-        <a href="research.html">Research</a>
-        <a href="museum.html">Museum</a>
-        <a href="travel.html">Travel</a>
-        <a href="snapshots.html">Snapshots</a>
+        <a href="the-lab.html">The Lab</a>
+        <a href="the-studio.html">The Studio</a>
+        <a href="the-road.html">The Road</a>
+        <a href="moments.html">Moments</a>
         <a href="writings.html">Writings</a>
     </div>
 
     <!-- Page Hero -->
     <div class="page-hero">
         <div class="page-hero__inner">
-            <div class="page-hero__label label reveal">04</div>
-            <h1 class="page-hero__title reveal reveal-delay-1">Moments</h1>
+            <div class="page-hero__label label reveal">03</div>
+            <h1 class="page-hero__title reveal reveal-delay-1">The Road</h1>
             <p class="page-hero__subtitle reveal reveal-delay-2">
-                Life in frames. A collection of photographs from everyday and extraordinary days.
+                Places visited, roads taken, and things noticed along the way.
             </p>
         </div>
     </div>
 
-    <!-- Snapshots grid — dynamically loaded -->
-    <div class="snapshots-grid" id="snapshots-container">
-        <div class="loading-state" style="grid-column: 1/-1;">Loading…</div>
+    <!-- Travel list — dynamically loaded -->
+    <div class="travel-list" id="travel-container">
+        <div class="loading-state">Loading…</div>
     </div>
 
     <!-- Footer -->
