@@ -28,15 +28,7 @@ if (hero && heroPhoto) {
   });
 }
 
-// --- Nav & Scroll indicator effects ---
-if (nav) {
-  const heroScroll = document.querySelector('.hero__scroll');
-  window.addEventListener('scroll', () => {
-    if (heroScroll) {
-      heroScroll.classList.toggle('is-hidden', window.scrollY > 100);
-    }
-  }, { passive: true });
-}
+// --- Scroll Reveal ---
 
 // --- Hamburger menu ---
 if (hamburger && mobileMenu) {

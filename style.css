@@ -377,58 +377,6 @@ img {
     perspective: 1000px;
 }
 
-.hero__scroll {
-    position: absolute;
-    bottom: var(--space-xl);
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    opacity: 1;
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.hero__scroll.is-hidden {
-    opacity: 0;
-    pointer-events: none;
-    transform: translate(-50%, 20px);
-}
-
-.hero__scroll-line {
-    width: 1px;
-    height: 60px;
-    background: linear-gradient(to bottom, var(--stone-300), transparent);
-    position: relative;
-    overflow: hidden;
-}
-
-.hero__scroll-line::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--teal-500);
-    transform: translateY(-100%);
-    animation: scroll-line 2s cubic-bezier(.76, 0, .3, 1) infinite;
-}
-
-@keyframes scroll-line {
-    0% {
-        transform: translateY(-100%);
-    }
-
-    50% {
-        transform: translateY(0);
-    }
-
-    100% {
-        transform: translateY(100%);
-    }
-}
-
 .hero__photo-col {
     position: relative;
     height: 100vh;
@@ -1523,13 +1471,18 @@ img {
         height: 70vw;
     }
 
-    .hero__photo-wrap::before {
-        background: linear-gradient(to bottom,
-                transparent 40%,
-                var(--stone-50) 100%);
+    .hero__photo-wrap {
+        clip-path: none;
     }
 
-    .hero__scroll {
+    .hero__photo {
+        clip-path: none;
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+
+    .hero__scribble-divider {
         display: none;
     }
 
