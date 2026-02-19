@@ -47,6 +47,15 @@
     --max-width: 1200px;
     --nav-height: 64px;
 
+    /* Barnali Rainbow — muted & tasteful */
+    --rainbow-1: #e15d5d;
+    --rainbow-2: #f0a05e;
+    --rainbow-3: #e8c45d;
+    --rainbow-4: #6bb377;
+    --rainbow-5: #5da8d1;
+    --rainbow-6: #7d8cc4;
+    --rainbow-7: #a78bfa;
+
     /* Transitions */
     --ease: cubic-bezier(0.4, 0, 0.2, 1);
     --duration: 0.25s;
@@ -132,13 +141,13 @@ img {
     font-family: var(--font-serif);
     font-size: 1.5rem;
     font-weight: 600;
-    color: var(--stone-900);
+    color: var(--teal-600);
     letter-spacing: 0.02em;
     transition: color var(--duration) var(--ease);
 }
 
 .nav__logo:hover {
-    color: var(--teal-600);
+    color: var(--teal-500);
 }
 
 .nav__links {
@@ -454,34 +463,69 @@ img {
     transform: rotate(2deg);
 }
 
-.hero__accent--spill {
-    top: 40%;
-    left: -5%;
-    width: 30px;
-    animation-delay: 1.6s;
-    opacity: 0.3 !important;
-}
-
 .hero__accent {
     position: absolute;
-    color: var(--teal-500);
     opacity: 0;
+    transition: color var(--duration) var(--ease);
     animation: accent-float 3s ease-in-out infinite alternate,
         reveal-scale 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-.hero__accent--star {
-    top: -20px;
-    left: -10px;
+.hero__accent--1 {
+    top: 5%;
+    left: 10%;
     width: 24px;
+    color: var(--rainbow-1);
     animation-delay: 1.2s;
 }
 
-.hero__accent--plus {
-    bottom: 20%;
-    right: 10%;
+.hero__accent--2 {
+    bottom: 25%;
+    right: 15%;
     width: 16px;
+    color: var(--rainbow-2);
     animation-delay: 1.4s;
+}
+
+.hero__accent--3 {
+    top: 45%;
+    left: -2%;
+    width: 30px;
+    color: var(--rainbow-3);
+    animation-delay: 1.6s;
+    opacity: 0.3 !important;
+}
+
+.hero__accent--4 {
+    top: 15%;
+    right: 5%;
+    width: 20px;
+    color: var(--rainbow-4);
+    animation-delay: 1.3s;
+}
+
+.hero__accent--5 {
+    bottom: 10%;
+    left: 20%;
+    width: 28px;
+    color: var(--rainbow-5);
+    animation-delay: 1.5s;
+}
+
+.hero__accent--6 {
+    top: 60%;
+    right: -2%;
+    width: 12px;
+    color: var(--rainbow-6);
+    animation-delay: 1.7s;
+}
+
+.hero__accent--7 {
+    bottom: 40%;
+    left: 5%;
+    width: 22px;
+    color: var(--rainbow-7);
+    animation-delay: 1.1s;
 }
 
 @keyframes accent-float {
@@ -529,7 +573,17 @@ img {
 
 .hero__name em {
     font-style: normal;
+    display: inline-flex;
     color: var(--teal-600);
+}
+
+.hero__name em span {
+    display: inline-block;
+    transition: transform 0.3s var(--ease), color 0.3s var(--ease);
+}
+
+.hero__name em span:hover {
+    transform: translateY(-8px) scale(1.1);
 }
 
 .hero__tagline {
@@ -1493,6 +1547,10 @@ img {
 
     .hero__name {
         font-size: clamp(3rem, 12vw, 5rem);
+    }
+
+    .hero__accents {
+        display: none;
     }
 
     /* Explore grid stacks */
